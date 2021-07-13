@@ -1,10 +1,12 @@
 class Shop {
-    constructor() {
+    constructor(pavadinimas, valiuta) {
+        this.pavadinimas = pavadinimas;
+        this.valiuta = valiuta;
         this.itemList = [];
         this.cart = [];
     }
     intro() {
-        console.log('Hi we are "Meskiuko kioskas".');
+        console.log(`Hi we are "${this.pavadinimas}". \nUse .items() method to get list of items to purchase.\nUse .order() method to get your order details.`);
     }
     addItem(item, price) {
         if (!this.isValidItem(item) || !this.isValidPrice(price)) {
@@ -53,35 +55,45 @@ class Shop {
             const element = this.itemList[i];
 
             if (itemKey === element.item.toLowerCase()) {
-                element.price === priceUpdate / 100;
+                element.price = priceUpdate / 100;
             }
 
         }
-        console.log(this.itemList);
-        console.log(`"Meskiuko kioskas" updated price and sells ${itemKey} for ${priceUpdate / 100} EUR now!`);
+        console.log(`"Meskiuko kioskas" updated price and sells ${itemKey} for ${priceUpdate / 100}0 EUR now!`);
     }
 
     createCart(name) {
+        this.cart.push({
+            identifikatorius: name
+        })
+
+        console.log(this.cart);
         console.log(`${name} has an open cart at "Meskiuko kioskas"!`);
     }
 
 
     addItemToCart(name, id, count) {
-        this.cart.push({
-            name: name,
-            id: id,
-            count: count
-        })
+        for (let i = 0; i < this.cart.length; i++) {
+            const element = this.cart[i];
+            if (element.identifikatorius === name) {
+                element.push({
+                    owner: name,
+                    items: [{
+                        id: id,
+                        count: count
+                    }]
+                })
+            }
+
+        }
+
     }
 
     order(name) {
 
-        console.log(`
-    {
-        owner: '${name}',
-        items: ${list}
-    }`
-        );
+        console.log(``)
+
+
     }
 
 }
