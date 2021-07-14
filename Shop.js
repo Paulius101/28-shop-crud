@@ -4,6 +4,7 @@ class Shop {
         this.valiuta = valiuta;
         this.itemList = [];
         this.cart = [];
+        this.cheque = 0;
     }
     intro() {
         console.log(`Hi we are "${this.pavadinimas}". \nUse .items() method to get list of items to purchase.\nUse .order() method to get your order details.`);
@@ -112,7 +113,6 @@ class Shop {
             console.log('------');
             console.log(cheque, value);
             let itemIndex = value.id - 1
-
             cheque += this.itemList[itemIndex].price * value.count
 
         }
@@ -130,11 +130,11 @@ class Shop {
             }
 
         }
-        this.itemList = updatedList
+        this.itemList = updatedList;
         console.log(` No more ${item} at "Meskiuko kioskas"!`);
     }
 
-    pay() {
+    pay(buyer, price) {
 
     }
 
