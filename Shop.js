@@ -15,9 +15,10 @@ class Shop {
         let formatedPrice = price / 100;
         let formatedItem = item.charAt(0).toUpperCase() + item.slice(1);
         this.itemList.push({
-            'item': formatedItem,
-            'price': formatedPrice
+            item: formatedItem,
+            price: formatedPrice
         })
+        console.log(this.itemList);
         console.log(`"Meskiuko kioskas" sells ${item} for ${formatedPrice} EUR now! `);
 
     }
@@ -62,37 +63,69 @@ class Shop {
         console.log(`"Meskiuko kioskas" updated price and sells ${itemKey} for ${priceUpdate / 100}0 EUR now!`);
     }
 
-    createCart(name) {
+    createCart(buyer) {
         this.cart.push({
-            identifikatorius: name
+            owner: buyer,
+            items: []
         })
 
-        console.log(this.cart);
-        console.log(`${name} has an open cart at "Meskiuko kioskas"!`);
+        // console.log(this.cart);
+        console.log(`${buyer} has an open cart at "Meskiuko kioskas"!`);
     }
 
 
     addItemToCart(name, id, count) {
         for (let i = 0; i < this.cart.length; i++) {
             const element = this.cart[i];
-            if (element.identifikatorius === name) {
-                element.push({
-                    owner: name,
-                    items: [{
-                        id: id,
-                        count: count
-                    }]
+            if (element.owner === name) {
+
+                element.items.push({
+                    id: id,
+                    count: count
                 })
             }
 
         }
-
+        // console.log(this.cart);
     }
 
     order(name) {
+        for (const entry of this.cart)
+            if (entry.owner === name) {
+                console.log(entry);
+            }
+    }
 
-        console.log(``)
+    orderPrice(buyer) {
+        let check = [];
+        for (let i = 0; i < this.cart.length; i++) {
+            const element = this.cart[i];
+            if (element.owner === buyer) {
+                check.push(element.items.id)
+            }
+        }
+        console.log(check);
+        // console.log(`${buyer} order: ${} EUR.`);
+    }
 
+    removeItem(item) {
+        let updatedList = []
+        for (let i = 0; i < this.itemList.length; i++) {
+            const element = this.itemList[i];
+            if (element.item.toLowerCase() !== item) {
+                updatedList.push(element)
+            }
+
+        }
+        this.itemList = updatedList
+        console.log(` No more ${item} at "Meskiuko kioskas"!`);
+    }
+
+    pay() {
+
+    }
+
+    shopSummary() {
 
     }
 
