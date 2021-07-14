@@ -97,15 +97,28 @@ class Shop {
     }
 
     orderPrice(buyer) {
-        let check = [];
+        let idsAndCounts = [];
+
         for (let i = 0; i < this.cart.length; i++) {
             const element = this.cart[i];
             if (element.owner === buyer) {
-                check.push(element.items.id)
+                idsAndCounts = element.items
+                break;
             }
         }
-        console.log(check);
-        // console.log(`${buyer} order: ${} EUR.`);
+        let cheque = 0;
+        for (let i = 0; i < idsAndCounts.length; i++) {
+            const value = idsAndCounts[i];
+            console.log('------');
+            console.log(cheque, value);
+            let itemIndex = value.id - 1
+
+            cheque += this.itemList[itemIndex].price * value.count
+
+        }
+
+        console.log(idsAndCounts);
+        console.log(`${buyer} order: ${cheque} EUR.`);
     }
 
     removeItem(item) {
